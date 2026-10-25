@@ -1,0 +1,75 @@
+% Copyright (c) 2026 Benjamin Stanley Frohman. All rights reserved.
+% Released under Apache 2.0 license as described in the file LICENSE.
+% Authors: Benjamin Stanley Frohman (ORCID: 0009-0006-7068-3718)
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+
+\title{\textbf{Homogenization: Triadic Partition, Cube Measure, Cube Average, and Telescoping Increment Lemmas in Lean 4}}
+\author{Benjamin Stanley Frohman\\
+\small Independent Researcher \quad|\quad ORCID: \href{https://orcid.org/0009-0006-7068-3718}{0009-0006-7068-3718}\\
+\small \texttt{frohmanbenjamin@gmail.com}}
+\date{Origin Provenance: July 6, 2026 (00:49:25 CDT) \\ \small Formalized in Lean 4 + Mathlib (Zero \texttt{sorry}) \quad|\quad Licensed under Apache-2.0}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We present a complete, zero-\texttt{sorry} Lean 4 (Mathlib) formalization of the multi-scale triadic cube hierarchy on $\mathbb{R}^d$ (`Eucl d := Fin d -> R`) required for quantitative stochastic and PDE homogenization arguments. Specifically, inside the namespace \texttt{Homogenization}, we construct the half-open triadic cube $\square_m(z) = \prod_{i=1}^d [z_i - \tfrac{1}{2}3^m, z_i + \tfrac{1}{2}3^m)$, prove its exact Lebesgue volume $\mathrm{vol}(\square_m(z)) = 3^{md}$ via Fubini--Tonelli product integration over \texttt{Fin d}, define the normalized cube average $\mathrm{cubeAvg}(m,z,g) = 3^{-md}\int_{\square_m(z)} g\,dx$, establish linearity and constant-function preservation for $L^1_{\mathrm{loc}}$ fields, and close the telescoping multi-scale increment identity
+\[
+\mathrm{cubeAvg}(m+K,z,g) - \mathrm{cubeAvg}(m,z,g) = \sum_{k=0}^{K-1} \bigl(\mathrm{cubeAvg}(m+k+1,z,g) - \mathrm{cubeAvg}(m+k,z,g)\bigr)
+\]
+together with the corresponding normed triangle inequality bound.
+\end{abstract}
+
+\section{Provenance and Verification Record}
+\begin{itemize}
+  \item \textbf{Author:} Benjamin Stanley Frohman (\texttt{ORCID: 0009-0006-7068-3718}).
+  \item \textbf{Origin Provenance Timestamp:} Monday, July 6, 2026, 00:49:25 CDT (\texttt{2026-07-06T05:49:25.627Z}, Google Drive Archive ID \texttt{1N6WfgOBJkPciRYWIQHJqAa2cmuWdu0yH}).
+  \item \textbf{Formalization Artifact:} \texttt{TriadicHomogenization.lean} (183 lines, zero \texttt{sorry}, zero custom axioms).
+\end{itemize}
+
+\section{Mathematical Statements Formalized in Lean 4}
+
+\begin{definition}[Half-Open Triadic Cube]
+For $d \in \mathbb{N}$, scale exponent $m \in \mathbb{N}$, and center $z \in \mathbb{R}^d$, the triadic cube $\mathrm{cube}(m,z) \subset \mathbb{R}^d$ is defined coordinatewise by
+\[
+\mathrm{cube}(m,z) = \bigcap_{i \in \mathrm{Fin}\,d} \Bigl\{ x \in \mathbb{R}^d \;\Big|\; z_i - \frac{3^m}{2} \le x_i < z_i + \frac{3^m}{2} \Bigr\}.
+\]
+\end{definition}
+
+\begin{lemma}[Exact Lebesgue Measure of the Triadic Cube -- \texttt{measure\_cube} \& \texttt{measureReal\_cube\_eq}]
+For every $d, m \in \mathbb{N}$ and $z \in \mathbb{R}^d$, the set $\mathrm{cube}(m,z)$ is measurable and its Lebesgue volume satisfies
+\[
+\mu(\mathrm{cube}(m,z)) = (3^m)^d > 0, \qquad \mu_{\mathbb{R}}(\mathrm{cube}(m,z)) = 3^{md} > 0.
+\]
+\end{lemma}
+
+\begin{lemma}[Normalized Cube Average Properties -- \texttt{cubeAvg\_add}, \texttt{cubeAvg\_smul}, \texttt{cubeAvg\_const}]
+Let $\mathrm{cubeAvg}(m,z,g) := \mu_{\mathbb{R}}(\mathrm{cube}(m,z))^{-1} \int_{x \in \mathrm{cube}(m,z)} g(x)\,d\mu(x)$. Then:
+\begin{enumerate}
+  \item For $g_1, g_2$ integrable on $\mathrm{cube}(m,z)$, $\mathrm{cubeAvg}(m,z,g_1 + g_2) = \mathrm{cubeAvg}(m,z,g_1) + \mathrm{cubeAvg}(m,z,g_2)$.
+  \item For $c \in \mathbb{R}$, $\mathrm{cubeAvg}(m,z, c \cdot g) = c \cdot \mathrm{cubeAvg}(m,z,g)$.
+  \item For constant $c \in E$, $\mathrm{cubeAvg}(m,z, x \mapsto c) = c$.
+\end{enumerate}
+\end{lemma}
+
+\begin{theorem}[Multi-Scale Telescoping Increment Identity and Norm Bound -- \texttt{telescoping\_increments} \& \texttt{norm\_Increment\_le\_sum}]
+For every $m, K \in \mathbb{N}$, $z \in \mathbb{R}^d$, and field $g : \mathbb{R}^d \to E$:
+\[
+\mathrm{cubeAvg}(m+K,z,g) - \mathrm{cubeAvg}(m,z,g) = \sum_{k=0}^{K-1} \bigl(\mathrm{cubeAvg}(m+k+1,z,g) - \mathrm{cubeAvg}(m+k,z,g)\bigr),
+\]
+and consequently
+\[
+\bigl\|\mathrm{cubeAvg}(m+K,z,g) - \mathrm{cubeAvg}(m,z,g)\bigr\| \le \sum_{k=0}^{K-1} \bigl\|\mathrm{cubeAvg}(m+k+1,z,g) - \mathrm{cubeAvg}(m+k,z,g)\bigr\|.
+\]
+\end{theorem}
+
+\section*{License and Copyright}
+Copyright \copyright\ 2026 Benjamin Stanley Frohman. All rights reserved. Licensed under the Apache License, Version 2.0 (\url{http://www.apache.org/licenses/LICENSE-2.0}).
+\end{document}

@@ -1,0 +1,34 @@
+{
+  "title": "Homogenization: Triadic Partition, Cube Measure, Cube Average, and Telescoping Increment Lemmas in Lean 4",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "publication_date": "2026-07-06",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "doi": "10.5281/zenodo.23629467",
+  "creators": [
+    {
+      "name": "Frohman, Benjamin Stanley",
+      "affiliation": "Independent Researcher",
+      "orcid": "0009-0006-7068-3718"
+    }
+  ],
+  "keywords": [
+    "homogenization",
+    "triadic cubes",
+    "Lean 4",
+    "Mathlib",
+    "formal verification",
+    "Lebesgue measure",
+    "multi-scale analysis"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/BenFrohman/triadic-homogenization-lean",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ],
+  "notes": "Origin Provenance: 2026-07-06 00:49:25 CDT (Google Drive Archive ID 1N6WfgOBJkPciRYWIQHJqAa2cmuWdu0yH). Copyright (c) 2026 Benjamin Stanley Frohman. All rights reserved. Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0).",
+  "description": "<p>Zero-<code>sorry</code> Lean 4 (Mathlib) formalization (<code>TriadicHomogenization.lean</code>) and companion manuscript establishing the multi-scale triadic cube hierarchy on <code>R^d</code> (<code>Eucl d := Fin d &rarr; R</code>) for quantitative PDE and stochastic homogenization: exact Lebesgue volume <code>measure_cube = (3^m)^d</code> via Fubini-Tonelli product measure over <code>Fin d</code>, normalized cube averages <code>cubeAvg m z g</code>, linearity and constant preservation, and multi-scale telescoping increment identities <code>telescoping_increments</code> and <code>norm_Increment_le_sum</code>.</p><p><strong>Origin Provenance:</strong> Monday, July 6, 2026, 12:49:25 AM CDT (<code>2026-07-06T05:49:25.627Z</code>).</p><p><strong>Copyright &amp; License:</strong> Copyright (c) 2026 Benjamin Stanley Frohman. All rights reserved. Licensed under the Apache License, Version 2.0 (ORCID: <a href=\"https://orcid.org/0009-0006-7068-3718\">0009-0006-7068-3718</a>).</p>"
+}
