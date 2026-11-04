@@ -52,3 +52,8 @@ Zero-`sorry` Lean 4 (Mathlib) formalization (`TriadicHomogenization.lean`) and c
 
 Copyright (c) 2026 Benjamin Stanley Frohman. All rights reserved.  
 Licensed under the Apache License, Version 2.0 (see [`LICENSE`](./LICENSE) and [`NOTICE`](./NOTICE)).
+
+## Zenodo archive
+
+- [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23629466.svg)](https://doi.org/10.5281/zenodo.23629466) Homogenization: Triadic Partition, Cube Measure, Cube Average, and Telescoping Increment Lemmas in Lean 4 — all versions: [10.5281/zenodo.23629466](https://doi.org/10.5281/zenodo.23629466); latest version: [10.5281/zenodo.23629467](https://doi.org/10.5281/zenodo.23629467)
+- [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23867595.svg)](https://doi.org/10.5281/zenodo.23867595) Homogenization: Triadic Partition, Cube Measure, Cube Average, and Telescoping Increment Lemmas in Lean 4 — all versions: [10.5281/zenodo.23867595](https://doi.org/10.5281/zenodo.23867595); latest version: [10.5281/zenodo.23867596](https://doi.org/10.5281/zenodo.23867596)
