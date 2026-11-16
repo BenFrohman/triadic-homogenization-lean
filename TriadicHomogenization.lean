@@ -8,6 +8,12 @@ import Homogenization.Geometry.TriadicPartition
 import Homogenization.Geometry.CubeMeasure
 import Homogenization.Multiscale.CubeAverage
 
+/-!
+# TriadicHomogenization
+
+Machine-checked Lean 4 module.
+-/
+
 namespace Homogenization
 
 open scoped BigOperators
